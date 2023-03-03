@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.TEhistoryMapper">
+    <insert id="addTEhistory">
+        insert into use_case_history
+            values (#{Executor},#{Creator},#{Execution},#{Test_Case_ID},#{Real_Output})
+    </insert>
+    <update id="addResult">
+        update use_case_history
+            set Real_Output=#{param1}
+        where Test_Case_ID=#{param2}
+    </update>
+</mapper>

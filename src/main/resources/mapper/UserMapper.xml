@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+    <select id="UserList" resultType="com.example.demo.entity.User">
+        select * from User
+    </select>
+    <select id="FindUser" parameterType="string" resultType="com.example.demo.entity.User">
+        select *
+        from User
+        where User_Id like CONCAT ('%',#{User_Id},'%')
+    </select>
+    <select id="FindPassword" parameterType="string" resultType="string">
+        select  User_Password
+        from User
+        where User_Id like CONCAT ('%',#{User_Id},'%')
+    </select>
+    <select id="findUserList" resultType="com.example.demo.entity.User">
+        select *
+        from user
+    </select>
+    <insert id="addNewUser">
+        insert into user
+            values (#{User_Id},#{User_Name},#{User_password},#{Position})
+    </insert>
+    <select id="FindId" resultType="string">
+        select User_Id
+        from user
+    </select>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.reportMapper">
+    <select resultType="com.example.demo.entity.Bug" id="findBugByModule">select * from bug where Related_Modules=#{ModuleName} </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugByDailyadd">select * from bug where creat_time=#{param1} and Related_Modules=#{param2} </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugByDailyclose">select * from bug where Bug_End_Date=#{param1} and Related_Modules=#{param2} </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugByEachadd">select * from bug where Creator=#{param1} and Related_Modules=#{param2} </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugByEachfinish">select * from bug where Person_In_Charge=#{param1} and Related_Modules=#{param2} and Bug_Status='完成' </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugByEachclose"> select * from bug where Person_In_Charge=#{param1} and Related_Modules=#{param2} and Bug_Status='关闭' </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugByType"> select * from bug where Bug_Type=#{param1} and Related_Modules=#{param2} </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugBySeverity">select * from bug where Operating_System=#{param1} and Related_Modules=#{param2} </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugByPriority">select * from bug where Priority=#{param1} and Related_Modules=#{param2} </select>
+
+    <select resultType="com.example.demo.entity.Bug" id="findBugByCondition">select * from bug where Bug_Status=#{param1} and Related_Modules=#{param2} </select>
+</mapper>

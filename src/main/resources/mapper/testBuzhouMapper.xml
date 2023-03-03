@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.testBuzhouMapper">
+    <insert id="addBuzhou">
+        insert into use_case_steps
+            values (#{Numbering},#{Use_case_ID},#{Expect_Output},#{Content})
+    </insert>
+    <update id="changeBuzhouContent">
+        update use_case_steps
+            set Content=#{param1}
+        where Numbering=#{param2} and User_caser_ID=#{param3}
+    </update>
+    <select id="findTestBuzhouByEx" resultType="com.example.demo.entity.testBuzhou">
+        select *
+        from use_case_steps
+        where Numbering=#{TEid}
+    </select>
+</mapper>

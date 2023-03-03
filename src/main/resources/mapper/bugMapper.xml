@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.bugMapper">
+<select id="findBugByPrincipal" parameterType="string" resultType="com.example.demo.entity.Bug">
+    select *
+    from bug
+    where Person_In_Charge =#{principal}
+</select>
+    <select id="findBugByBuilder" resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Creator =#{Builder}
+    </select>
+    <select id="findBugByStartData" resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Bug_Create_Date like CONCAT('%',#{data},'%')
+    </select>
+    <select id="findBugByEndData" resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Bug_End_Date like CONCAT('%',#{data},'%')
+    </select>
+    <select id="findBugByClose"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Person_In_Charge=#{param2} and Bug_Status=#{param1}
+    </select>
+    <select id="findBugByMe"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Person_In_Charge=#{param1} or Creator=#{param1} or Assignee=#{param1}
+    </select>
+    <select id="findBugBySearch1"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Person_In_Charge=#{param1} and Bug_Title=#{param2}
+    </select>
+    <select id="findBugBySearch2"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Creator=#{param1} and Bug_Title=#{param2}
+    </select>
+    <select id="findBugBySearch3"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Bug_Status=#{param1} and Person_In_Charge=#{param2} and Bug_Title=#{param3}
+    </select>
+    <update id="affirmBug">
+        update bug
+            set Bug_Status='已确认'
+        where Bug_Title=#{BugName}
+    </update>
+    <update id="closeBug">
+        update bug
+        set Bug_Status='已关闭'
+        where Bug_Title=#{BugName}
+    </update>
+    <update id="fixBug">
+        update bug
+        set Bug_Status='已解决'
+        where Bug_Title=#{BugName}
+    </update>
+    <update id="activateBug">
+        update bug
+        set Bug_Status='未确认'
+        where Bug_Title=#{BugName}
+    </update>
+    <update id="assignBug">
+        update bug
+        set Assignee=#{param2} ,Person_In_Charge=#{param3}
+        where Bug_Title=#{param1}
+    </update>
+    <delete id="deleteBug">
+        delete from bug
+        where Bug_Title=#{BugName}
+    </delete>
+    <insert id="Insert_Bug">
+        insert into bug
+            values (#{Bug_Title},#{Priority},#{Bug_Status},#{Creator},#{Bug_Create_Date},#{Bug_End_Date},#{Assignee},#{Severity},#{Operating_System},#{Related_Modules},#{Related_Tasks},#{Related_Needs},#{Person_In_Charge},#{Bug_Type})
+    </insert>
+    <select id="findBugByModule" resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where Related_Modules=#{module}
+    </select>
+
+    <select id="findBugByName"  resultType="com.example.demo.entity.Bug">
+    select *
+    from bug
+    where  Bug_Title like CONCAT('%',#{BugName},'%')
+    </select>
+    <select id="findBugByBuilderName"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where  Creator =#{Builder}
+    </select>
+    <select id="findBugByPrincipalName"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where  Person_In_Charge =#{PrincipalName}
+    </select>
+    <select id="findBugByTypeName"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where  Bug_Title =#{TypeName}
+    </select>
+    <select id="findBugByStatus"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where  Bug_Status=#{Status}
+    </select>
+    <select id="findBugBySeverity"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where  Severity =#{Severity}
+    </select>
+    <select id="findBugByAssigneeName"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where  Assignee =#{PrincipalName}
+    </select>
+    <select id="findAllBug"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+    </select>
+    <select id="findBugByPriority"  resultType="com.example.demo.entity.Bug">
+        select *
+        from bug
+        where  Priority =#{Priority}
+    </select>
+    <select id="findBugStartData" resultType="string">
+        select Bug_Create_Date
+        from bug
+    </select>
+    <select id="findBugEndData" resultType="string">
+        select Bug_End_Date
+        from bug
+    </select>
+    <select id="findBugBuilder" resultType="string">
+        select Creator
+        from bug
+    </select>
+    <select id="findBugPrincipal" resultType="string">
+        select Person_In_Charge
+        from bug
+    </select>
+    <select id="findBugAssignee" resultType="string">
+        select Assignee
+        from bug
+    </select>
+    <select id="findBugType" resultType="string">
+        select Bug_Type
+        from bug
+    </select>
+    <select id="findBugSeverity" resultType="string">
+        select Severity
+        from bug
+    </select>
+    <select id="findBugPriority" resultType="string">
+        select Priority
+        from bug
+    </select>
+    <select id="findBugStatus" resultType="string">
+        select Bug_Status
+        from bug
+    </select>
+    <select id="findBugName" resultType="string">
+        select Bug_Title
+        from bug
+    </select>
+    <select id="findBugCondition" resultType="string">
+        select Bug_Status
+        from bug
+        where Bug_Title=#{BugName}
+    </select>
+    <update id="setCloseUser">
+        update bug
+            set Person_In_Charge=#{param1}
+        where Bug_Title=#{param2}
+    </update>
+    <update id="setActiveUser">
+        update bug
+        set Person_In_Charge=#{param1}
+        where Bug_Title=#{param2}
+    </update>
+    <update id="setFinishUser">
+        update bug
+        set Person_In_Charge=#{param1}
+        where Bug_Title=#{param2}
+    </update>
+</mapper>

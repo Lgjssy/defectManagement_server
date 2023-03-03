@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+​
+<div id="app">
+  <div v-if="userList.length">
+    <table>
+      <thead>
+      <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>资金</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="item in userList">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.money}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div v-else>
+    <h2>数据为空！</h2>
+  </div>
+</div>
+​
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script type="text/javascript">
+  // get的访问方式
+  var vm = new Vue({
+    el:"#app",
+    data:{
+      user: {
+        id: "",
+        name: "",
+        money: ""
+      },
+      userList: []
+    },
+    methods: {
+      findAll:function () {
+        // 在当前方法定义一个变量，表名是vue对象
+        var _this = this;
+        axios.get('/account/find')
+                .then(function (response) { // 函数执行成功后执行的函数
+                  _this.userList = response.data; // 响应结果的数据给userList
+                  console.log(response);
+                })
+                .catch(function (error) { // 函数执行失败后执行的函数
+                  console.log(error);
+                })
+      }
+    },
+    created:function () {
+      this.findAll();
+    }
+  })
+</script>
+</html>

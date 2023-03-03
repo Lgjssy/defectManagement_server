@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.TestExampleMapper">
+<select id="findExByExecutor" resultType="com.example.demo.entity.TestExample">
+    select *
+    from test_case
+    where Executor=#{param1} and Owning_Module_Name=#{param2}
+</select>
+    <select id="findExByBuilder" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+        where Creator=#{param1} and Owning_Module_Name=#{param2}
+    </select>
+    <select id="findExByUser" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+        where Executor=#{param1} or Creator=#{param1} and Owning_Module_Name=#{param2}
+    </select>
+    <select id="findExByPlan" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+        where Text_plan=#{TestPlanNum}
+    </select>
+    <select id="findExBySearch1" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+        where Executor=#{param1} and Test_Case_ID=#{param2} and Owning_Module_Name=#{param3}
+    </select>
+    <select id="findExBySearch2" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+        where Creator=#{param1} and Test_Case_ID=#{param2} and Owning_Module_Name=#{param3}
+    </select>
+    <select id="findExBySearch3" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+        where Executor=#{param1} or Creator=#{param1} and Test_Case_ID=#{param2} and Owning_Module_Name=#{param3}
+    </select>
+<update id="changeExampleState">
+    update test_case
+        set State=#{param2}
+    where Test_Case_ID=#{param1}
+</update>
+    <update id="changeExType">
+        update test_case
+        set Test_Case_Type=#{param2}
+        where Test_Case_ID=#{param1}
+    </update>
+    <update id="changeExPriority">
+        update test_case
+        set Priority=#{param2}
+        where Test_Case_ID=#{param1}
+    </update>
+    <update id="changeExKey">
+        update test_case
+        set Key_Words=#{param2}
+        where Test_Case_ID=#{param1}
+    </update>
+    <update id="changeExName">
+        update test_case
+        set Test_Case_Name=#{param2}
+        where Test_Case_ID=#{param1}
+    </update>
+    <update id="changeExPCondition">
+        update test_case
+        set Precondition=#{param2}
+        where Test_Case_ID=#{param1}
+    </update>
+    <update id="changeExDes">
+        update test_case
+        set Description=#{param2}
+        where Test_Case_ID=#{param1}
+    </update>
+    <insert id="addExample" useGeneratedKeys="true" keyProperty="Test_Case_ID" >
+        insert into test_case
+            values (#{Test_Case_ID},#{Test_Case_Name},#{Test_Case_Type},#{Creator},#{Executor},#{Result},#{Number_Of_Execution_Result},#{Number_Of_Bug},#{Use_Case_Steps},#{State},#{Precondition},#{Owning_Module_Name},#{Priority},#{Key_Words},#{Description},#{Applicable_Stage},#{Execution_Time},#{Text_plan})
+    </insert>
+    <delete id="deleteExample">
+        delete
+            from test_case
+        where Test_Case_ID=#{TEid}
+    </delete>
+    <select id="findExByName" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+        where Test_Case_Name like CONCAT('%',#{Test_Case_Name},'%')
+    </select>
+    <select id="findAllTe" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+    </select>
+    <select id="findTeById" resultType="com.example.demo.entity.TestExample">
+        select *
+        from test_case
+        where Test_Case_ID=#{iD}
+    </select>
+</mapper>

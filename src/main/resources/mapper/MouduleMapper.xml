@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ModuleMapper">
+    <select id="findModuleByFather" resultType="com.example.demo.entity.Module">
+        select *
+        from module
+        where Parent_Module=#{ModuleName}
+    </select>
+    <select id="findModule" resultType="com.example.demo.entity.Module">
+        select *
+        from module
+        where Module_Name=#{ModuleName}
+    </select>
+    <insert id="insertModule">
+        insert into module
+            values (#{param1},#{param2},#{param3},#{param4})
+    </insert>
+    <delete id="deleteModule">
+        delete
+            from module
+        where Module_Name=#{ModuleName}
+    </delete>
+    <update id="updateModuleName">
+        update module
+            set Module_Name=#{param2}
+        where Module_Name=#{param1}
+    </update>
+    <update id="updateModuleDescription">
+        update module
+            set Nodule_Description=#{param2}
+        where Module_Name=#{param1}
+    </update>
+    <select id="findModuleByProject" resultType="com.example.demo.entity.Module">
+    select *
+    from module
+    where Project_Name=#{ProjectName}
+    </select>
+    <select id="findAllModules" resultType="com.example.demo.entity.Module">
+        select *
+        from module
+    </select>
+    <insert id="addNewModule">
+        insert into module
+            values (#{Module_Name},#{Module_Description},#{Parent_Module},#{Project_Name})
+    </insert>
+    <select id="findModuleName" resultType="string">
+        select Module_Name
+        from module
+    </select>
+</mapper>
